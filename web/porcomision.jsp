@@ -30,6 +30,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
         <h1>Empleado por comision</h1>
          <a href="index.jsp">Regresar al inicio</a><BR>
          <% 
+             
              //creacion del formulario
              out.println("<FORM ACTION=porcomision.jsp METHOD=post>");
              out.println("Commissionrate : <input type=text name=rate><BR>");
@@ -38,7 +39,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
              out.println("</FORM>");
              //accion del boton calcular
              if (request.getParameter("calcular") != null) {
-         ApplicationContext context = new ClassPathXmlApplicationContext("/org/payroll/Spring.xml");
+                 try {
+             ApplicationContext context = new ClassPathXmlApplicationContext("/org/payroll/Spring.xml");
          
              String rate = request.getParameter("rate");
              String gross = request.getParameter("gross");
@@ -50,6 +52,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
             ce.setCommissionRate(Double.parseDouble(rate));
                  out.println(" Payment : "+
                " "+ce.getFirstName() +" "+ce.getLastName()+" "+ce.payment());
+             } catch (Exception Ex) {
+                        out.println("Débes ingresar datos válidos");
+                         System.out.println("Exception" + Ex.toString());
+             }
              };
          %>
     </body>
