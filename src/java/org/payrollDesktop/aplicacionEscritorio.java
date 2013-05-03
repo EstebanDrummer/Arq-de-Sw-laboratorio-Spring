@@ -4,12 +4,9 @@
  */
 package org.payrollDesktop;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 import javax.swing.JOptionPane;
 import org.payroll.CommissionEmployee;
-import org.payroll.Employee;
 import org.payroll.HourlyEmployee;
 import org.payroll.SalariedEmployee;
 import org.springframework.context.ApplicationContext;
@@ -60,6 +57,7 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
         jBHabi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("payroll");
 
         tipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "normal", "horas", "comision" }));
 
@@ -73,6 +71,7 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
 
         jLabel5.setText("wage");
 
+        wage.setText("0");
         wage.setEnabled(false);
 
         jLabel6.setText("hours");
@@ -87,16 +86,20 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
 
         jLabel7.setText("salary");
 
+        JTsalary.setText("0");
         JTsalary.setEnabled(false);
 
+        jThours.setText("0");
         jThours.setEnabled(false);
 
         jLabel8.setText("Commissionrate");
 
         jLabel9.setText("GrossSales");
 
+        jTRate.setText("0");
         jTRate.setEnabled(false);
 
+        jTSales.setText("0");
         jTSales.setEnabled(false);
 
         jBHabi.setText("Habilitar");
@@ -195,8 +198,7 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTSales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jThours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jThours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jBHabi)
                 .addGap(44, 44, 44)
@@ -216,14 +218,16 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
                se.setLastName("odinson");
                se.setSsn("123-234-45");
                String salario = JTsalary.getText();
+               JTsalary.setEnabled(false);
                se.setSalary(Double.parseDouble(salario));
                JOptionPane.showMessageDialog(rootPane," Payment : "+
                " "+se.getFirstName() +" "+se.getLastName()+" "+se.payment() 
                ,"pago", WIDTH);
+                JTsalary.setText("0");
         }else
         if(r.equalsIgnoreCase("horas")){
-            wage.setEnabled(true);
-            jThours.setEnabled(true);
+            wage.setEnabled(false);
+            jThours.setEnabled(false);
              HourlyEmployee he = context.getBean(HourlyEmployee.class);
             he.setFirstName("Bruce");
             he.setLastName("Banner");
@@ -233,11 +237,13 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(rootPane," Payment : "+
                " "+he.getFirstName() +" "+he.getLastName()+" "+he.payment() 
                ,"pago", WIDTH);
+               wage.setText("0");
+            jThours.setText("0");
         }else
         if(r.equalsIgnoreCase("comision")){
             
-            jTRate.setEnabled(true);
-            jTSales.setEnabled(true);
+            jTRate.setEnabled(false);
+            jTSales.setEnabled(false);
             CommissionEmployee ce = context.getBean(CommissionEmployee.class);
             ce.setFirstName("Jacques");
             ce.setLastName("Duquesne");
@@ -247,8 +253,11 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane," Payment : "+
                " "+ce.getFirstName() +" "+ce.getLastName()+" "+ce.payment() 
                ,"pago", WIDTH);
-       
+            jTRate.setText("0");
+            jTSales.setText("0");
         } 
+          jBHabi.setEnabled(true);
+        JBCalculate.setEnabled(false);
     }//GEN-LAST:event_JBCalculateActionPerformed
 
     private void jBHabiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabiActionPerformed
