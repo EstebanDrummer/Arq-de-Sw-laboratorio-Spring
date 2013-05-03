@@ -23,7 +23,7 @@ public class aplicacionEscritorio extends javax.swing.JFrame {
 
     
     /**
-     * Creates new form aplicacionEscritorio
+     * Crea tes new form aplicacionEscritorio
      */
     public aplicacionEscritorio() {
         initComponents();
